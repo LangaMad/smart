@@ -53,11 +53,11 @@ MY_APPS = [
     'apps.clients',
 
     #REST
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_framework_simplejwt',
-    'drf_yasg',
-    'django_filters',
+    # 'rest_framework',
+    #     # 'rest_framework.authtoken',
+    #     # 'rest_framework_simplejwt',
+    #     # 'drf_yasg',
+    #     # 'django_filters',
 ]
 
 INSTALLED_APPS = CORE_APPS + MY_APPS
@@ -92,20 +92,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#          'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': config('POSTGRES_DB'),
+#             'USER': config('POSTGRES_USER'),
+#             'PASSWORD': config('POSTGRES_PASSWORD'),
+#             'HOST': config('POSTGRES_HOST'),
+#             'PORT': config('POSTGRES_PORT', cast=int),
+#     }
+# }
 DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('POSTGRES_DB'),
-            'USER': config('POSTGRES_USER'),
-            'PASSWORD': config('POSTGRES_PASSWORD'),
-            'HOST': config('POSTGRES_HOST'),
-            'PORT': config('POSTGRES_PORT', cast=int),
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": "db.sqlite3",
+        }
     }
-}
 
 
 # Password validation

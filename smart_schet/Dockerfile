@@ -12,9 +12,9 @@ RUN apt-get update && \
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-RUN pip install --upgrade pip setuptools wheel
-
-RUN pip install passport-mrz-extractor pyfcm docopt
+#RUN pip install --upgrade pip setuptools wheel
+#
+#RUN pip install passport-mrz-extractor pyfcm docopt
 
 #RUN pip install python-decouple
 # Копируем файл зависимостей и устанавливаем их
