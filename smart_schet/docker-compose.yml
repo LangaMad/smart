@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -31,50 +31,5 @@ services:
     depends_on:
       - db
 
-  celery:
-    build: .
-    command: sh -c "celery -A alma worker --loglevel=info"
-    volumes:
-      - .:/app
-      - ./media:/app/media
-      - ./staticfiles:/app/staticfiles
-    restart: always
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-    depends_on:
-      - db
-
-  rabbitmq:
-    image: rabbitmq:3.13-management            
-    container_name: rabbitmq
-    restart: unless-stopped
-    ports:
-      - "5672:5672"    
-      - "15672:15672"  
-    environment:
-      RABBITMQ_DEFAULT_USER: myuser
-      RABBITMQ_DEFAULT_PASS: mypass
-      RABBITMQ_DEFAULT_VHOST: "/"             
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq    
-
-  bot:
-    build:
-      context: .
-    command: python bot_osago.py
-    volumes:
-      - .:/app
-    env_file:
-      - .env
-    depends_on:
-      - web
-      - db
-    restart: always
-
 volumes:
   postgres_data:
-  rabbitmq_data:

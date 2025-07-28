@@ -37,11 +37,15 @@ class Invoice(BaseModel):
 
 
 class Product(models.Model):
-    product_number = models.CharField(max_length=250,null=True,blank=True,verbose_name="Номер продукта (байты)")
+    product_number = models.CharField(max_length=250,null=True,blank=True,verbose_name="Номер продукта")
+    price = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="Цена",null=True,blank=True)
+    quantity = models.IntegerField(verbose_name="Количество", null=True, blank=True)
+    total_amount = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="Общая сумма", null=True, blank=True)
 
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
+
 
     def __str__(self):
         return f"Продукт {self.pk}"
